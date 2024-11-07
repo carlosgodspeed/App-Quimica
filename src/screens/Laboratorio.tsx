@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function Laboratorio() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tela laboratorio</Text>
+      <Text style={styles.title}>Tela Home</Text>
     </View>
   );
 }

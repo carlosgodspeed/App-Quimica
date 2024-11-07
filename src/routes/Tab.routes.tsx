@@ -13,21 +13,21 @@ export default function TabRoutes(){
             name="Elementos"
             component={Elementos}
             options={{
-              tabBarIcon: () => <Ionicons name="logo-electron" />
+              tabBarIcon: ({ color, size}) => <Ionicons name="logo-electron" color={'black'} size={size} />
             }}
           />  
           <Tab.Screen
             name="Home"
             component={Laboratorio}
             options={{
-              tabBarIcon: () => <Ionicons name="home" />
+              tabBarIcon: ({ color, size}) => <Ionicons name="home" color={'black'} size={size} />
             }}
           />  
           <Tab.Screen
-            name="Tabelaquimica"
+            name="Tabela"
             component={Tabelaquimica}
             options={{
-              tabBarIcon: () => <Ionicons name="albums-outline"/>
+              tabBarIcon: ({ color, size}) => <Ionicons name="albums-outline" color={'black'} size={size} />
             }}
           />  
         </Tab.Navigator>

@@ -1,73 +1,86 @@
 import React from 'react';
+import { View, Image, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Ionicons } from '@expo/vector-icons'; // Biblioteca de ícones
-import Home from '../screens/Home'; // Tela Home
-import TabRoutes from './Tab.routes'; // Suas Tabs
-import Lab from '../screens/Lab'; // Tela Laboratório
-import Notifications from '../screens/Notifications'; // Tela de Notificações
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { Ionicons } from '@expo/vector-icons';
+import Home from '../screens/Home';
+import TabRoutes from './Tab.routes';
+import Lab from '../screens/Lab';
+import Notifications from '../screens/Notifications';
 
-const Drawer = createDrawerNavigator(); // Criando o Drawer Navigator
+const Drawer = createDrawerNavigator();
+
+// Custom Drawer Content
+function CustomDrawerContent(props) {
+  return (
+    <DrawerContentScrollView {...props}>
+      {/* Logo acima dos itens do Drawer */}
+      <View style={styles.logoContainer}>
+        <Image
+          source={require('../assets/logo.png')} // Substitua pelo caminho correto do seu logo
+          style={styles.logo}
+          resizeMode="contain"
+        />
+      </View>
+      {/* Itens do Drawer */}
+      <DrawerItemList {...props} />
+    </DrawerContentScrollView>
+  );
+}
 
 // Função principal do Drawer Navigator
 function DrawerNavigator() {
   return (
     <Drawer.Navigator
-      initialRouteName="Home" // Define a tela inicial ao abrir o app
+      initialRouteName="Home"
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
-        headerShown: false, // Esconde o cabeçalho
+        headerShown: false,
         drawerStyle: {
-          backgroundColor: '#2C3E50', // Cor de fundo do Drawer
+          backgroundColor: '#34495E',
         },
         drawerLabelStyle: {
-          fontSize: 18, // Tamanho da fonte do nome do item no Drawer
-          color: '#ecf0f1', // Cor do texto
+          fontSize: 18,
+          color: '#ecf0f1',
         },
-        drawerActiveBackgroundColor: '#34495E', // Cor de fundo do item ativo
-        drawerActiveTintColor: '#ecf0f1', // Cor do texto no item ativo
-        drawerInactiveTintColor: '#bdc3c7', // Cor do texto no item inativo
+        drawerActiveBackgroundColor: '#000000',
+        drawerActiveTintColor: '#ecf0f1',
+        drawerInactiveTintColor: '#ffffff',
       }}
     >
-      {/* Tela Home com ícone */}
       <Drawer.Screen
         name="Home"
         component={Home}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="home-outline" size={24} color={color} /> // Ícone para Home
+            <Ionicons name="home-outline" size={24} color={color} />
           ),
         }}
       />
-
-      {/* Tela Tabela com ícone */}
       <Drawer.Screen
         name="Tabela"
         component={TabRoutes}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="grid-outline" size={24} color={color} /> // Ícone para Tabela
+            <Ionicons name="grid-outline" size={24} color={color} />
           ),
         }}
       />
-
-      {/* Tela Laboratório com ícone */}
       <Drawer.Screen
         name="Laboratorio"
         component={Lab}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="flask-outline" size={24} color={color} /> // Ícone para Laboratório
+            <Ionicons name="flask-outline" size={24} color={color} />
           ),
         }}
       />
-
-      {/* Tela de Notificações com ícone */}
       <Drawer.Screen
         name="Notifications"
         component={Notifications}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="notifications-outline" size={24} color={color} /> // Ícone para Notificações
+            <Ionicons name="notifications-outline" size={24} color={color} />
           ),
         }}
       />
@@ -75,11 +88,22 @@ function DrawerNavigator() {
   );
 }
 
-// Função principal para controlar a navegação
+const styles = StyleSheet.create({
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+    marginTop: 10,
+  },
+  logo: {
+    width: 220,
+    height: 220,
+  },
+});
+
 export default function Routes() {
   return (
     <NavigationContainer>
-      <DrawerNavigator /> {/* Apenas o DrawerNavigator é usado como a navegação principal */}
+      <DrawerNavigator />
     </NavigationContainer>
   );
 }

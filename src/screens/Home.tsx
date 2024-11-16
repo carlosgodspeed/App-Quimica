@@ -1,12 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import AnimatedLoader from '../Components/AnimatedLoader'; // Importando o componente de animação
 
 export default function Home() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tela Home</Text>
-      <AnimatedLoader /> {/* Aqui está a animação */}
+      <Text style={styles.title}>Home</Text>
     </View>
   );
 }

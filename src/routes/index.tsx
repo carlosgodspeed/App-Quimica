@@ -1,12 +1,55 @@
-import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Image, Text, StyleSheet, Animated } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import Home from '../screens/Home';
 import TabRoutes from './Tab.routes';
 import Lab from '../screens/Lab';
-import Notifications from '../screens/Notifications';
+import Ambiental from '../screens/Ambiental';
+import { useFocusEffect } from '@react-navigation/native';
+
+// Componente Loading
+const Loading = () => {
+  const [rotation1] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    // Animações para cada círculo girar infinitamente
+    const rotate = (rotationValue) => {
+      return Animated.loop(
+        Animated.timing(rotationValue, {
+          toValue: 1,
+          duration: 2000,
+          useNativeDriver: true,
+        })
+      );
+    };
+
+    rotate(rotation1).start();
+  }, []);
+
+  const interpolateRotation = (rotationValue) => {
+    return rotationValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg'],
+    });
+  };
+
+  return (
+    <View style={styles.page}>
+      <View style={styles.container}>
+        <Animated.View
+          style={[
+            styles.ring,
+            { borderBottomColor: 'rgb(252, 183, 55)' },
+            { transform: [{ rotateZ: interpolateRotation(rotation1) }] },
+          ]}
+        />
+        <Text style={styles.loadingText}>loading</Text>
+      </View>
+    </View>
+  );
+};
 
 const Drawer = createDrawerNavigator();
 
@@ -30,6 +73,24 @@ function CustomDrawerContent(props) {
 
 // Função principal do Drawer Navigator
 function DrawerNavigator() {
+  const [loading, setLoading] = useState(false);
+
+  // Exibe o loading quando a tela for focada
+  useFocusEffect(
+    React.useCallback(() => {
+      setLoading(true);
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 3000); // 5 segundos de carregamento
+
+      return () => clearTimeout(timer); // Limpa o timeout se o componente for desmontado ou perder o foco
+    }, [])
+  );
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <Drawer.Navigator
       initialRouteName="Home"
@@ -76,11 +137,11 @@ function DrawerNavigator() {
         }}
       />
       <Drawer.Screen
-        name="Notifications"
-        component={Notifications}
+        name="Gestão Ambiental"
+        component={Ambiental}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="notifications-outline" size={24} color={color} />
+            <Ionicons name="earth" size={24} color={color} />
           ),
         }}
       />
@@ -97,6 +158,28 @@ const styles = StyleSheet.create({
   logo: {
     width: 220,
     height: 220,
+  },
+  page: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black', // Definindo o fundo do loading
+  },
+  container: {
+    position: 'relative',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  ring: {
+    width: 190,
+    height: 190,
+    borderWidth: 8,
+    borderRadius: 95, // Meio para torná-lo redondo
+    position: 'absolute',
+  },
+  loadingText: {
+    color: 'white', // Texto de carregamento em branco
+    fontSize: 20,
   },
 });
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function Lab() {
+export default function Ambiental() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Lab</Text>
+      <Text style={styles.title}>Ambiental</Text>
     </View>
   );
 }

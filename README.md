@@ -1,7 +1,12 @@
 # Aplicativo Para Estudantes de Química
 
 ## Desenvolvimento Atual
-Atualmente, foram desenvolvidas a navegação e a tela da **Tabela Periódica**
+#### Navegação ✅ 
+#### Tela de Home ✅ 
+#### Tela da Tabela Periodica ✅
+#### Tela de Elementos (Em Andamento)
+#### Tela laboratórios (Em Andamento)
+#### Tela Gestão Ambiental (Em Andamento)
 
 ## Funcionalidades Esperadas
 
@@ -26,9 +31,11 @@ Uma área focada em sustentabilidade e química verde, explicando como os proces
 
 ## Imagens Atuais
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/22240c3d-e491-4a81-bc8d-c07b5247b745" alt="Drawer" width="300"/>
-  <span>&nbsp;&nbsp;&nbsp;</span>  <!-- Espaço entre as imagens -->
-  <img src="https://github.com/user-attachments/assets/e2e4c986-800f-44a4-b6f8-7bc001cb165a" alt="Tabela Periódica" width="300"/>
+<p align="center" style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+  <img src="https://github.com/user-attachments/assets/eb9cc810-11ce-4ce7-a0c5-40788112aab7" alt="Tela de Home" width="300" style="display: inline-block;"/>
+  <img src="https://github.com/user-attachments/assets/22240c3d-e491-4a81-bc8d-c07b5247b745" alt="Drawer" width="300" style="display: inline-block;"/>
+  <img src="https://github.com/user-attachments/assets/e2e4c986-800f-44a4-b6f8-7bc001cb165a" alt="Tabela Periódica" width="300" style="display: inline-block;"/>
 </p>
+
+
 

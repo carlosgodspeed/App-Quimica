@@ -41,7 +41,7 @@ const Loading = () => {
         <Animated.View
           style={[
             styles.ring,
-            { borderBottomColor: 'rgb(252, 183, 55)' },
+            { borderBottomColor: 'rgb(52, 73, 94)' },
             { transform: [{ rotateZ: interpolateRotation(rotation1) }] },
           ]}
         />

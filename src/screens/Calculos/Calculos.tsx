@@ -1,5 +1,8 @@
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
 
+
+// adicionar placas de sinalização quimica
+
 export default function Elementos() {
   return (
     <ScrollView style={styles.container}>
@@ -17,7 +20,7 @@ export default function Elementos() {
       <View style={styles.elementListContainer}>
         <View style={styles.card}>
           <View style={styles.cardContent}>
-            <Image source={{ uri: 'https://via.placeholder.com/100' }} style={styles.cardImage} />
+            <Image source={require('../../assets/logo.png')} style={styles.cardImage} />
             <Text style={styles.element}>Cálculo 1</Text>
             <Text style={styles.calculation}>Detalhes do cálculo...</Text>
           </View>

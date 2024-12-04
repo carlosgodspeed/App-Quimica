@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import Elementos from '../screens/Elementos/Elementos'; 
+import Elementos from '../screens/Calculos/Calculos'; 
 import Tabelaquimica from '../screens/Tabela/Tabelaquimica'; 
 
 const Tab = createBottomTabNavigator();
@@ -23,7 +23,7 @@ export default function TabRoutes() {
       }}
     >
       <Tab.Screen
-        name="Elementos"
+        name="Calculos"
         component={Elementos}
         options={{
           tabBarIcon: ({ color, size }) => (

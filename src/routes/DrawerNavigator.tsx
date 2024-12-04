@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet, Animated } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { View, Image, Text, StyleSheet, Animated, ScrollView, ScrollViewProps } from 'react-native';
+import { DrawerNavigationState, NavigationContainer, ParamListBase } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import Home from '../screens/Home/Home';
@@ -8,13 +8,14 @@ import TabRoutes from './Tab.routes';
 import Lab from '../screens/Laboratorio/Laboratorio';
 import Ambiental from '../screens/Ambiental/Ambiental';
 import { useFocusEffect } from '@react-navigation/native';
+import { DrawerNavigationHelpers, DrawerDescriptorMap } from '@react-navigation/drawer/lib/typescript/commonjs/src/types';
 
 const Loading = () => {
   const [rotation1] = useState(new Animated.Value(0));
 
   useEffect(() => {
 
-    const rotate = (rotationValue) => {
+    const rotate = (rotationValue: Animated.Value | Animated.ValueXY) => {
       return Animated.loop(
         Animated.timing(rotationValue, {
           toValue: 1,
@@ -27,7 +28,7 @@ const Loading = () => {
     rotate(rotation1).start();
   }, []);
 
-  const interpolateRotation = (rotationValue) => {
+  const interpolateRotation = (rotationValue: Animated.Value) => {
     return rotationValue.interpolate({
       inputRange: [0, 1],
       outputRange: ['0deg', '360deg'],
@@ -53,7 +54,7 @@ const Loading = () => {
 const Drawer = createDrawerNavigator();
 
 // Custom Drawer Content
-function CustomDrawerContent(props) {
+function CustomDrawerContent(props: (React.JSX.IntrinsicAttributes & ScrollViewProps & { children: React.ReactNode; } & React.RefAttributes<ScrollView>) | (React.JSX.IntrinsicAttributes & { state: DrawerNavigationState<ParamListBase>; navigation: DrawerNavigationHelpers; descriptors: DrawerDescriptorMap; })) {
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.logoContainer}>

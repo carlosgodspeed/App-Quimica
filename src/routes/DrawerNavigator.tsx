@@ -3,18 +3,17 @@ import { View, Image, Text, StyleSheet, Animated } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
-import Home from '../screens/Home';
+import Home from '../screens/Home/Home';
 import TabRoutes from './Tab.routes';
-import Lab from '../screens/Lab';
-import Ambiental from '../screens/Ambiental';
+import Lab from '../screens/Laboratorio/Laboratorio';
+import Ambiental from '../screens/Ambiental/Ambiental';
 import { useFocusEffect } from '@react-navigation/native';
 
-// Componente Loading
 const Loading = () => {
   const [rotation1] = useState(new Animated.Value(0));
 
   useEffect(() => {
-    // Animações para cada círculo girar infinitamente
+
     const rotate = (rotationValue) => {
       return Animated.loop(
         Animated.timing(rotationValue, {
@@ -57,33 +56,29 @@ const Drawer = createDrawerNavigator();
 function CustomDrawerContent(props) {
   return (
     <DrawerContentScrollView {...props}>
-      {/* Logo acima dos itens do Drawer */}
       <View style={styles.logoContainer}>
         <Image
-          source={require('../assets/logo.png')} // Substitua pelo caminho correto do seu logo
+          source={require('../assets/logo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
       </View>
-      {/* Itens do Drawer */}
       <DrawerItemList {...props} />
     </DrawerContentScrollView>
   );
 }
 
-// Função principal do Drawer Navigator
 function DrawerNavigator() {
   const [loading, setLoading] = useState(false);
 
-  // Exibe o loading quando a tela for focada
   useFocusEffect(
     React.useCallback(() => {
       setLoading(true);
       const timer = setTimeout(() => {
         setLoading(false);
-      }, 3000); // 5 segundos de carregamento
+      }, 3000);
 
-      return () => clearTimeout(timer); // Limpa o timeout se o componente for desmontado ou perder o foco
+      return () => clearTimeout(timer);
     }, [])
   );
 

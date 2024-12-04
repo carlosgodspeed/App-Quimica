@@ -215,11 +215,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   cardsWrapper: {
-    flexDirection: 'column', // Mantém as linhas na vertical
+    flexDirection: 'column',
   },
   row: {
-    flexDirection: 'row', // Alinha os cards horizontalmente dentro de cada linha
-    marginBottom: 10, // Espaçamento entre as linhas
+    flexDirection: 'row', 
+    marginBottom: 10, 
   },
   card: {
     alignItems: 'center',
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 10,
     color: 'white',
-    marginHorizontal: 8, // Aumenta o espaçamento entre os cards
+    marginHorizontal: 8, 
     padding: 5,
   },
   selectedCard: {

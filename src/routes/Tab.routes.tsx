@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import Elementos from '../screens/Elementos'; // Sua tela de Elementos
-import Tabelaquimica from '../screens/Tabelaquimica'; // Sua tela de Tabela
+import Elementos from '../screens/Elementos/Elementos'; // Sua tela de Elementos
+import Tabelaquimica from '../screens/Tabela/Tabelaquimica'; // Sua tela de Tabela
 
 const Tab = createBottomTabNavigator();
 

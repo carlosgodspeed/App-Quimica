@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function Lab() {
+export default function Ambiental() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Lab</Text>
+      <Text style={styles.title}>Ambiental</Text>
     </View>
   );
 }
@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: 'bold',
-    marginBottom: 20,  // Espaçamento entre o título e a animação
+    marginBottom: 20, 
   },
 });

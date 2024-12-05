@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  Image, 
+  ScrollView, 
+  TouchableOpacity 
+} from 'react-native';
 
 export default function Laboratorio() {
   const [expandedCard, setExpandedCard] = useState(null);
@@ -18,6 +25,21 @@ export default function Laboratorio() {
     },
     {
       title: 'Cálculo 3',
+      imageUri: 'https://via.placeholder.com/100',
+      details: 'Detalhes adicionais sobre Cálculo 3: Descrição completa e dicas de uso.',
+    },
+    {
+      title: 'Cálculo 4',
+      imageUri: 'https://via.placeholder.com/100',
+      details: 'Detalhes adicionais sobre Cálculo 3: Descrição completa e dicas de uso.',
+    },
+    {
+      title: 'Cálculo 5',
+      imageUri: 'https://via.placeholder.com/100',
+      details: 'Detalhes adicionais sobre Cálculo 3: Descrição completa e dicas de uso.',
+    },
+    {
+      title: 'Cálculo 6',
       imageUri: 'https://via.placeholder.com/100',
       details: 'Detalhes adicionais sobre Cálculo 3: Descrição completa e dicas de uso.',
     },
@@ -49,23 +71,22 @@ export default function Laboratorio() {
         <Text style={styles.rule}>6. Informe qualquer acidente imediatamente ao responsável.</Text>
       </View>
       <View style={styles.vidrariasContainer}>
-        <Text style={styles.vidrariasTitle}>Vidrarias do Laboratório</Text>
-      </View>
-      <View style={styles.elementListContainer}>
+       <Text style={styles.vidrariasTitle}>Vidrarias do Laboratório</Text>
+      <View style={styles.imageGrid}>
         {cardsData.map((card, index) => (
-          <TouchableOpacity key={index} style={styles.card} onPress={() => handleCardPress(index)}>
-            <View style={styles.cardContent}>
-              <Image source={{ uri: card.imageUri }} style={styles.cardImage} />
-              <Text style={styles.element}>{card.title}</Text>
-            </View>
-            {expandedCard === index && (
-              <View style={styles.expandedInfo}>
-                <Text style={styles.calculation}>{card.details}</Text>
-              </View>
-            )}
-          </TouchableOpacity>
-        ))}
-      </View>
+      <TouchableOpacity key={index} onPress={() => handleCardPress(index)} style={styles.gridItem}>
+        <Image source={{ uri: card.imageUri }} style={styles.gridImage} />
+        <Text style={styles.gridText}>{card.title}</Text>
+        {expandedCard === index && (
+          <View style={styles.expandedInfo}>
+            <Text style={styles.calculation}>{card.details}</Text>
+          </View>
+        )}
+      </TouchableOpacity>
+    ))}
+  </View>
+</View>
+
     </ScrollView>
   );
 }
@@ -161,4 +182,27 @@ const styles = StyleSheet.create({
     color: '#000000',
     marginBottom: 8,
   },
+  imageGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+  gridItem: {
+    width: '30%', // Largura de cada item (ajustável)
+    marginBottom: 16, // Espaçamento entre as linhas
+    alignItems: 'center',
+  },
+  gridImage: {
+    width: '100%', // Largura ajustada ao container
+    height: 100, // Altura da imagem (ajustável)
+    resizeMode: 'contain',
+    marginBottom: 8, // Espaço entre a imagem e o texto
+  },
+  gridText: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#ffffff',
+  },
+  
 });

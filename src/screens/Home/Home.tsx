@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated,Text } from 'react-native';
-import Video from 'react-native-video';
 import {
   Container,
   LogoContainer,
@@ -27,9 +26,9 @@ export default function Home() {
     <Container>
       <LogoContainer>
         <Logo
-          source={{uri: 'https://www.hareketligifler.net/data/media/1783/kimyaci-hareketli-resim-0011.gif'}}
+          source={require('../../assets/logo.png')}
           resizeMode="contain"
-        />
+        /> 
       </LogoContainer>
       <AnimatedTitle style={{ opacity: fadeAnim }}>
         Bem-vindo ao App de Química

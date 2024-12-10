@@ -57,10 +57,6 @@ export default function Laboratorio() {
       <Text></Text>
       <Text></Text>
       <Text style={styles.title}>Dicas de Laboratorio</Text>
-      <View style={styles.logoContainer}>
-        {/* Substitua o caminho da imagem pelo caminho do seu logo */}
-        <Image source={{ uri: 'https://media.giphy.com/media/d1X4oq3ZsBN28/giphy.gif' }} style={styles.logo} />
-      </View>
       <View style={styles.rulesContainer}>
         <Text style={styles.rulesTitle}>Regras do Laboratório</Text>
         <Text style={styles.rule}>1. Sempre use equipamentos de proteção individual (EPI).</Text>

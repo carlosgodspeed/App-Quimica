@@ -4,9 +4,9 @@ import { DrawerNavigationState, NavigationContainer, ParamListBase } from '@reac
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import Home from '../screens/Home/Home';
-import TabRoutes from './Tab.routes';
 import Lab from '../screens/Laboratorio/Laboratorio';
 import Ambiental from '../screens/Ambiental/Ambiental';
+import Tabelaquimica from '../screens/Tabela/Tabelaquimica'; 
 import { useFocusEffect } from '@react-navigation/native';
 import { DrawerNavigationHelpers, DrawerDescriptorMap } from '@react-navigation/drawer/lib/typescript/commonjs/src/types';
 
@@ -115,12 +115,12 @@ function DrawerNavigator() {
         }}
       />
       <Drawer.Screen
-        name="Tabela"
-        component={TabRoutes}
+        name="Tabelas"
+        component={Tabelaquimica}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="grid-outline" size={24} color={color} />
-          ),
+            <Ionicons name="albums-outline" size={24} color={color} />
+            ),
         }}
       />
       <Drawer.Screen

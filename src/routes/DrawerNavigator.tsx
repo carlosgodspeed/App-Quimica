@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Animated,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import {
@@ -57,6 +58,8 @@ const Loading = () => {
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
+  const [searchQuery, setSearchQuery] = useState('');
+
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.logoContainer}>
@@ -67,6 +70,18 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
           accessibilityLabel="Logotipo do aplicativo"
         />
       </View>
+
+      {/* Barra de pesquisa no Drawer */}
+      <View style={styles.searchBar}>
+        <Ionicons name="search-outline" size={24} color="gray" />
+        <TextInput
+          placeholder="Pesquisar..."
+          style={styles.searchInput}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
+      </View>
+
       <DrawerItemList {...props} />
     </DrawerContentScrollView>
   );
@@ -175,6 +190,22 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     marginTop: 210,
+  },
+  searchBar: {
+    paddingHorizontal: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF',
+    height: 40,
+    borderRadius: 10,
+    marginTop: 10,
+    marginBottom: 20,
+    elevation: 3,
+  },
+  searchInput: {
+    width: '90%',
+    paddingHorizontal: 10,
+    fontSize: 16,
   },
 });
 

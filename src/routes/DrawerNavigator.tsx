@@ -1,60 +1,62 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, Text, StyleSheet, Animated, ScrollView, ScrollViewProps } from 'react-native';
-import { DrawerNavigationState, NavigationContainer, ParamListBase } from '@react-navigation/native';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  Animated,
+  ScrollView,
+} from 'react-native';
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerContentComponentProps,
+} from '@react-navigation/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import Home from '../screens/Home/Home';
 import Lab from '../screens/Laboratorio/Laboratorio';
 import Ambiental from '../screens/Ambiental/Ambiental';
-import Tabelaquimica from '../screens/Tabela/Tabelaquimica'; 
-import { useFocusEffect } from '@react-navigation/native';
-import { DrawerNavigationHelpers, DrawerDescriptorMap } from '@react-navigation/drawer/lib/typescript/commonjs/src/types';
+import Tabelaquimica from '../screens/Tabela/Tabelaquimica';
 
 const Loading = () => {
-  const [rotation1] = useState(new Animated.Value(0));
+  const [rotation] = useState(new Animated.Value(0));
 
   useEffect(() => {
+    const rotate = Animated.loop(
+      Animated.timing(rotation, {
+        toValue: 1,
+        duration: 2000,
+        useNativeDriver: true,
+      })
+    );
+    rotate.start();
 
-    const rotate = (rotationValue: Animated.Value | Animated.ValueXY) => {
-      return Animated.loop(
-        Animated.timing(rotationValue, {
-          toValue: 1,
-          duration: 2000,
-          useNativeDriver: true,
-        })
-      );
-    };
-
-    rotate(rotation1).start();
+    return () => rotate.stop(); // Cleanup animation
   }, []);
 
-  const interpolateRotation = (rotationValue: Animated.Value) => {
-    return rotationValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['0deg', '360deg'],
-    });
-  };
+  const interpolateRotation = rotation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
 
   return (
-    <View style={styles.page}>
-      <View style={styles.container}>
-        <Animated.View
-          style={[
-            styles.ring,
-            { borderBottomColor: 'rgb(52, 73, 94)' },
-            { transform: [{ rotateZ: interpolateRotation(rotation1) }] },
-          ]}
-        />
-        <Text style={styles.loadingText}>loading</Text>
-      </View>
+    <View style={styles.loadingContainer}>
+      <Animated.View
+        style={[
+          styles.loadingRing,
+          { transform: [{ rotateZ: interpolateRotation }] },
+        ]}
+      />
+      <Text style={styles.loadingText}>Carregando...</Text>
     </View>
   );
 };
 
 const Drawer = createDrawerNavigator();
 
-// Custom Drawer Content
-function CustomDrawerContent(props: (React.JSX.IntrinsicAttributes & ScrollViewProps & { children: React.ReactNode; } & React.RefAttributes<ScrollView>) | (React.JSX.IntrinsicAttributes & { state: DrawerNavigationState<ParamListBase>; navigation: DrawerNavigationHelpers; descriptors: DrawerDescriptorMap; })) {
+function CustomDrawerContent(props: DrawerContentComponentProps) {
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.logoContainer}>
@@ -62,6 +64,7 @@ function CustomDrawerContent(props: (React.JSX.IntrinsicAttributes & ScrollViewP
           source={require('../assets/logo.png')}
           style={styles.logo}
           resizeMode="contain"
+          accessibilityLabel="Logotipo do aplicativo"
         />
       </View>
       <DrawerItemList {...props} />
@@ -75,9 +78,7 @@ function DrawerNavigator() {
   useFocusEffect(
     React.useCallback(() => {
       setLoading(true);
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 3000);
+      const timer = setTimeout(() => setLoading(false), 3000);
 
       return () => clearTimeout(timer);
     }, [])
@@ -100,7 +101,7 @@ function DrawerNavigator() {
           fontSize: 18,
           color: '#ecf0f1',
         },
-        drawerActiveBackgroundColor: '#000000',
+        drawerActiveBackgroundColor: '#2C3E50',
         drawerActiveTintColor: '#ecf0f1',
         drawerInactiveTintColor: '#ffffff',
       }}
@@ -120,11 +121,11 @@ function DrawerNavigator() {
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="albums-outline" size={24} color={color} />
-            ),
+          ),
         }}
       />
       <Drawer.Screen
-        name="Laboratorio"
+        name="Laboratório"
         component={Lab}
         options={{
           drawerIcon: ({ color }) => (
@@ -137,7 +138,7 @@ function DrawerNavigator() {
         component={Ambiental}
         options={{
           drawerIcon: ({ color }) => (
-            <Ionicons name="earth" size={24} color={color} />
+            <Ionicons name="earth-outline" size={24} color={color} />
           ),
         }}
       />
@@ -155,27 +156,25 @@ const styles = StyleSheet.create({
     width: 220,
     height: 220,
   },
-  page: {
+  loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black', // Definindo o fundo do loading
+    backgroundColor: '#000',
   },
-  container: {
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  ring: {
+  loadingRing: {
     width: 190,
     height: 190,
     borderWidth: 8,
-    borderRadius: 95, // Meio para torná-lo redondo
+    borderColor: '#34495E',
+    borderRadius: 95,
+    borderTopColor: 'transparent',
     position: 'absolute',
   },
   loadingText: {
-    color: 'white', // Texto de carregamento em branco
+    color: 'white',
     fontSize: 20,
+    marginTop: 210,
   },
 });
 

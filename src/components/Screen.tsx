@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Animated, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 
-export const colors = { bg: '#f3f7f7', panel: '#ffffff', line: '#dfe8e7', text: '#183039', muted: '#6b7e84', lime: '#0aa894', navy: '#193e4b', soft: '#e5f5f1' };
+export const colors = { bg: '#08131b', panel: '#111f2a', line: '#243743', text: '#e7f1f4', muted: '#95a9b4', lime: '#58dec3', navy: '#123542', soft: '#183a43', elevated: '#172833', subtle: '#10212b' };
 
 export function Screen({ children, scroll = true }: { children: React.ReactNode; scroll?: boolean }) {
   const [opacity] = useState(() => new Animated.Value(0));
